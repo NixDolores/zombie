@@ -5,10 +5,6 @@
  */
 package test;
 
-import java.io.IOException;
-import combat.Combat;
-
-
 /**
  *
  * @author Ike
@@ -18,17 +14,22 @@ public class CombatTest {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
-        // Check the odds of getting at least one hit with an attack of
-        int totalHits = 0;
-        for (int i = 1; i <= 1000; i++) {
-            int hits = Combat.resolveHits(4, 6);
-            if (hits != 0) {
-                totalHits++;
-            }
-        }
-        // Calculate Average.
-        double avg = (double)totalHits / 1000;
-        System.out.println("Average: " + avg);
+    public static void main(String[] args) {
+        runCombatTest();
     }
+    
+    public static void runCombatTest() {
+        // Build Test Array
+        CombatTestData.runTest(1,  2,  83.3);
+        CombatTestData.runTest(1,  6,  16.7);
+        CombatTestData.runTest(1,  7,     0);
+        CombatTestData.runTest(3,  5,  99.7);
+        CombatTestData.runTest(3,  6,  94.9);
+        CombatTestData.runTest(3,  9,  74.1);
+        CombatTestData.runTest(9,  2, 100.0);
+        CombatTestData.runTest(9, 12, 100.0);
+    }
+    
+    
+
 }
