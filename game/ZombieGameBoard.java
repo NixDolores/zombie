@@ -2,7 +2,6 @@ package game;
 
 import actors.Survivor;
 import actors.Zombie;
-import actors.ZombieGameObject;
 import event.ZombieEvent;
 import util.ActionType;
 

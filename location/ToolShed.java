@@ -9,6 +9,6 @@ package location;
  *
  * @author Ike
  */
-public class ToolShed {
+public class ToolShed extends Location {
     
 }

@@ -5,10 +5,14 @@
  */
 package location;
 
+import game.ZombieGameObject;
+
 /**
  *
- * @author Ike
+ * @author ike
  */
-public class Outhouse extends Location {
+public class Location extends ZombieGameObject {
+    
+    
     
 }

@@ -9,6 +9,6 @@ package location;
  *
  * @author Ike
  */
-public class GrainSilo {
+public class GrainSilo extends Location {
     
 }

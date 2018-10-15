@@ -6,20 +6,22 @@ public final class CombatTestData {
 
     private int defense;
     private int attack;
+    private final int minHits;
     private double expected;
     private double actual;
     
     private static final double TOLERANCE = 5.0;
 
-    public CombatTestData(int _attack, int _defense, double _expected) {
+    public CombatTestData(int _attack, int _defense, double _expected, int _minHits) {
         this.defense = _defense;
         this.attack = _attack;
         this.expected = _expected;
+        this.minHits = _minHits;
         this.calcTestRun();
     }
 
-    public static void runTest(int _attack, int _defense, double _expected) {
-        CombatTestData ctest = new CombatTestData(_attack, _defense, _expected);
+    public static void runTest(int _attack, int _defense, double _expected, int _minHits) {
+        CombatTestData ctest = new CombatTestData(_attack, _defense, _expected, _minHits);
         System.out.println(ctest._toString());
     }
 
@@ -63,7 +65,8 @@ public final class CombatTestData {
     }
     
     public String _toString() {
-        return this.getResult() + " [A: " + this.attack + "  D: " + this.defense 
+        return this.getResult() + " [A: " + this.attack + "  D: " 
+                + this.defense + "Hits: " + this.minHits
                 + " Expected: " + this.expected + " Actual: " + this.actual + "]";
     }
     
@@ -71,7 +74,7 @@ public final class CombatTestData {
         int totalHits = 0;
         for (int i = 1; i <= 1000; i++) {
             int hits = Combat.resolveHits(this.attack, this.defense);
-            if (hits != 0) {
+            if (hits >= this.minHits) {
                 totalHits++;
             }
         }

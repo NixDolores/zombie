@@ -1,8 +1,8 @@
-/*
+/**
  * This is the base class for any object that will throw or catch events being
  * fired.
  */
-package actors;
+package game;
 
 import event.ZombieEvent;
 import event.ZombieEventListenerInterface;
@@ -14,11 +14,25 @@ import java.util.List;
  *
  * @author riquigley
  */
-public class ZombieGameObject implements ZombieEventListenerInterface {
+public class ZombieGameObject extends DataObject implements ZombieEventListenerInterface {
 
+    public final String dataTable = "zombie_table";
+    
     private final List listeners = new ArrayList();
+    protected int xaxis;
+    protected int yaxis;
+    protected int zaxis;
+    protected int attack;
+    protected int defense;
+    protected int speed;
+    protected int width;
+    protected int height;
+ 
+    public ZombieGameObject() {
+        super();
+    }
 
-   /*
+   /**
     * Register a listener to be called upon when an event is fired.
     * @param ZombieEventListenerInterface listener the object that is called upon.
     */
@@ -26,7 +40,7 @@ public class ZombieGameObject implements ZombieEventListenerInterface {
         listeners.add(listener);
     }
 
-   /*
+   /**
     * Unregister an event from being called upon.
     * @param ZombieEventListenerInteface listener the object to unregister.
     */
@@ -34,7 +48,7 @@ public class ZombieGameObject implements ZombieEventListenerInterface {
         listeners.remove(listener);
     }
 
-   /*
+   /**
     * When an event is fired, this method iterates through the events and fires off
     * their messageReceived method. We translate the listener array to an object array
     * while iterating in order to avoid Concurrent Access errors.
@@ -46,11 +60,11 @@ public class ZombieGameObject implements ZombieEventListenerInterface {
         this.fireEvent(evt);
     }
 
-   /*
+   /**
     * When an event is fired, this method iterates through the events and fires off
     * their messageReceived method. We translate the listener array to an object array
     * while iterating in order to avoid Concurrent Access errors.
-    * @param ZombieEvent event - the event that caused this to be fired.
+    * @param _event
     */
     protected synchronized void fireEvent(ZombieEvent _event) {
         // Clone the active listeners.
@@ -65,5 +79,69 @@ public class ZombieGameObject implements ZombieEventListenerInterface {
     public void messageReceived(ZombieEvent event) {
         System.out.println("Message Received has not been implemented for this class");
     }
+
+    public int getXaxis() {
+        return this.xaxis;
+    }
+
+    public int getYaxis() {
+        return this.yaxis;
+    }
+
+    public int getZaxis() {
+        return this.zaxis;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+    
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getAttack() {
+        return this.attack;
+    }
+
+    public int getDefense() {
+        return this.defense;
+    }
+
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    public void setSpeed(int _speed) {
+        this.speed = _speed;
+    }
+
+    public void setDefense(int _defense) {
+        this.defense = _defense;
+    }
+
+    public void setAttack(int _attack) {
+        this.attack = _attack;
+    }
+
+    public void setXaxis(int _xaxis) {
+        this.xaxis = _xaxis;
+    }
+
+    public void setYaxis(int _yaxis) {
+        this.yaxis = _yaxis;
+    }
+
+    public void setZaxis(int _zaxis) {
+        this.zaxis = _zaxis;
+    }
+
+    public void setHeight(int _height) {
+        this.height = _height;
+    }
+    
+    public void setWidth(int _width) {
+        this.width = _width;
+    }    
 
 }

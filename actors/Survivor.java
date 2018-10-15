@@ -1,5 +1,6 @@
 package actors;
 
+import game.ZombieGameObject;
 import event.ZombieEvent;
 import util.ActionType;
 
