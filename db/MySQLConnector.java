@@ -23,7 +23,9 @@ public class MySQLConnector implements DBConnector{
     Connection connection = null;
     Statement statement = null;
 
-    static String host = "jdbc:mysql://localhost:3306/zombie";
+    static String host = "jdbc:mysql://localhost:3306/zombie_game";
+    // For mac users of MAMP using the default MySQL port
+    // static String host = "jdbc:mysql://localhost:8889/zombie_game";
     static String user = "root";
     static String password = "root";
 
