@@ -17,7 +17,7 @@ import java.util.Map;
 public class DynamicData {
 
     protected final String dataTable = "";
-    
+
     public Map getProperties() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         // A transport data object for name-value pairs.
         Map<String,String> pairs = new HashMap<>();
