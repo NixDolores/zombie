@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actors;
 
-import game.ZombieGameObject;
 import event.ZombieEvent;
+import game.ZombieGameMoveable;
 import util.ActionType;
 
 /**
- *
  * @author Ike
  */
-public class Zombie extends ZombieGameObject {
+public class Zombie extends ZombieGameMoveable {
+
+    public final String dataTable = "zombie_table";
 
     @Override
     public void messageReceived(ZombieEvent _event) {

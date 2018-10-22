@@ -14,20 +14,17 @@ import java.util.List;
  *
  * @author riquigley
  */
-public class ZombieGameObject extends DataObject implements ZombieEventListenerInterface {
+public abstract class ZombieGameObject extends DataObject implements ZombieEventListenerInterface {
 
     public final String dataTable = "zombie_table";
-    
+
     private final List listeners = new ArrayList();
     protected int xaxis;
     protected int yaxis;
     protected int zaxis;
-    protected int attack;
-    protected int defense;
-    protected int speed;
     protected int width;
     protected int height;
- 
+
     public ZombieGameObject() {
         super();
     }
@@ -95,33 +92,9 @@ public class ZombieGameObject extends DataObject implements ZombieEventListenerI
     public int getHeight() {
         return this.height;
     }
-    
+
     public int getWidth() {
         return this.width;
-    }
-
-    public int getAttack() {
-        return this.attack;
-    }
-
-    public int getDefense() {
-        return this.defense;
-    }
-
-    public int getSpeed() {
-        return this.speed;
-    }
-
-    public void setSpeed(int _speed) {
-        this.speed = _speed;
-    }
-
-    public void setDefense(int _defense) {
-        this.defense = _defense;
-    }
-
-    public void setAttack(int _attack) {
-        this.attack = _attack;
     }
 
     public void setXaxis(int _xaxis) {
@@ -139,9 +112,9 @@ public class ZombieGameObject extends DataObject implements ZombieEventListenerI
     public void setHeight(int _height) {
         this.height = _height;
     }
-    
+
     public void setWidth(int _width) {
         this.width = _width;
-    }    
+    }
 
 }

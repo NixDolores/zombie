@@ -1,6 +1,6 @@
 package combat;
 
-import java.util.Random;
+import util.Common;
 
 /**
  * @author Ike
@@ -45,8 +45,6 @@ public class Combat {
             {1000, 1000, 1000, 1000,  996,  975,  901,  707,  446,  183,   57}
         };
 
-    private static final Random random = new Random();
-
     public static int resolveHits(int _attack, int _defense) {
         if (Combat.checkHit(Combat.threeHit, _attack, _defense)) {
             return 3;
@@ -62,12 +60,8 @@ public class Combat {
 
     private static Boolean checkHit(int[][] _hitTable, int _attack, int _defense) {
         int target = _hitTable[_attack - 1][_defense - 2];
-        int roll = Combat.getRandom();
+        int roll = Common.getRandom(1000);
         return (roll <= target);
-    }
-
-    private static int getRandom() {
-        return Combat.random.nextInt(1000) + 1;
     }
 
 }

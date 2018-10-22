@@ -5,7 +5,9 @@
  */
 package test;
 
-import game.ZombieGameObject;
+import actors.Zombie;
+import game.EndOfRoundAction;
+import game.ZombieGameMoveable;
 import java.lang.reflect.InvocationTargetException;
 
 
@@ -35,7 +37,7 @@ public class ZombieTest {
      */
     public static void runDataTest() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchFieldException {
         // Create a DataObject and see if has a uuid.
-        ZombieGameObject zombie = new ZombieGameObject();
+        ZombieGameMoveable zombie = new Zombie();
         zombie.setAttack(1);
         zombie.setDefense(2);
         zombie.setSpeed(3);
@@ -47,6 +49,23 @@ public class ZombieTest {
         zombie.setName("Test Zombie");
         System.out.println("Zombie Uuid: " + zombie.getUuid());
         zombie.save();
+    }
+
+    /**
+     * Tests that the end of turn roll is working as expected.
+     * There is a 1/6 chance that a 1 (ADD_1_TO_ZOMBIE POOL) is returned.
+     * There is a 2/6 chance that a 2 (ADD_2_TO_ZOMBIE_POOL) is returned.
+     * There is a 2/6 chance that a 3 (ADD_3_TO_ZOMBIE_POOL) is returned.
+     * There is a 1/6 chance that the zombies attack.
+     */
+    public static void runRollTest() {
+        // Run the test 1,000 times, counting how many of each results we get.
+        int[] results = new int[]{0,0,0,0};
+        for (int i = 0; i < 1000; i++ ) {
+            int pos = EndOfRoundAction.resolveTurn();
+            results[pos]++;
+        }
+        // Now calculate the percentage of each.
     }
 
     /**

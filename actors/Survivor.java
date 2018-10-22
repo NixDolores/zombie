@@ -1,20 +1,10 @@
 package actors;
 
-import game.ZombieGameObject;
 import event.ZombieEvent;
+import game.ZombieGameMoveable;
 import util.ActionType;
 
-public class Survivor extends ZombieGameObject {
-
-    public void attack() {
-        System.out.println("Survivor: Player is Attacking!");
-        this.fireEvent(ActionType.PLAYER_ATTACK);
-    }
-
-    public void move() {
-        System.out.println("Survivor: Player is Moving!");
-        this.fireEvent(ActionType.PLAYER_MOVE);
-    }
+public class Survivor extends ZombieGameMoveable {
 
     @Override
     public void messageReceived(ZombieEvent _event) {
