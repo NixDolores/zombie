@@ -1,5 +1,5 @@
 /**
- * This unit test is the main entry point for all tests to be peformed on the system.
+ * This unit test is the main entry point for all tests to be performed on the system.
  * Last Updated 10/16/2018
  * @author iquigley
  */
@@ -23,7 +23,9 @@ public class ZombieTest {
      */
     public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchFieldException {
         // runCombatTest();
-        runDataTest();
+        // runDataTest();
+        runLoadTest();
+        // runRollTest();
     }
 
     /**
@@ -49,6 +51,12 @@ public class ZombieTest {
         zombie.setName("Test Zombie");
         System.out.println("Zombie Uuid: " + zombie.getUuid());
         zombie.save();
+        System.out.println("Deleting the zombie object.");
+        zombie.delete();
+    }
+
+    public static void runLoadTest() {
+        Zombie.loadById(5);
     }
 
     /**
@@ -59,15 +67,27 @@ public class ZombieTest {
      * There is a 1/6 chance that the zombies attack.
      */
     public static void runRollTest() {
+        int rolls = 1000;
         // Run the test 1,000 times, counting how many of each results we get.
         int[] results = new int[]{0,0,0,0};
-        for (int i = 0; i < 1000; i++ ) {
+        for (int i = 0; i < rolls; i++ ) {
             int pos = EndOfRoundAction.resolveTurn();
-            results[pos]++;
+            results[pos - 1]++;
         }
-        // Now calculate the percentage of each.
+        System.out.println(ZombieTest.rollTestResult("1", results[0], rolls, 16.7));
+        System.out.println(ZombieTest.rollTestResult("2", results[1], rolls, 33.3));
+        System.out.println(ZombieTest.rollTestResult("3", results[2], rolls, 33.3));
+        System.out.println(ZombieTest.rollTestResult("Attack", results[3], rolls, 16.7));
+        
     }
 
+    protected static String rollTestResult(String _zombieAdds, int _zombieAddTotals, int _rolls, double _expected) {
+        double result = (double) Math.round((double)_zombieAddTotals/_rolls * 1000) / 10;
+        int tolerance = 3;
+        String status = ( Math.abs(result - _expected) <= tolerance ? "Pass" : "Fail");
+        // Now calculate the percentage of each.
+        return status + ": Zombies Added: " + _zombieAdds + " Expected: " + _expected + " Actual: " + result;
+    }
     /**
      * Runs a combat test to check to make sure we're loading the right percentages.
      * Uses the helper class CombatTestData.

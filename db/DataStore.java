@@ -6,6 +6,8 @@ package db;
 
 import game.DataObject;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataStore {
 
@@ -37,32 +39,40 @@ public class DataStore {
      * filtering objects from the Database.
      * @return DataObject
      */
-    public static DataObject readObect() {
+    public static DataObject readObect(Map <String, String> _map, String _table) {
+        HashMap<String, Object> results = connector.readObject(_map, _table);
+        System.out.println("Result" + results);
         return new DataObject();
     }
 
 
     /**
-     * @TODO Implement this process. Updates an object already recorded in the
-     * database with new property values.
+     * Updates an object already recorded in the database with new property values.
      * @param obj
      * @return Boolean
+     * @throws java.lang.IllegalAccessException
+     * @throws java.lang.reflect.InvocationTargetException
+     * @throws java.lang.NoSuchFieldException
      */
-    public static Boolean updateObject(DataObject obj) {
-        return true;
+    public static Boolean updateObject(DataObject obj) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchFieldException {
+        return connector.updateObject(obj.getProperties(), obj.getUuid(), obj.getDataTable());
     }
 
 
     /**
-     * @TODO Implement this process. Deletes an object from the database. Since
-     * we never want to actually delete records, we'll need to add an "active"
+     * Deletes an object from the database.
+     * Since we never want to actually delete records, we'll need to add an "active"
      * property to the base DataObject class. This implementation will then set
      * the active value to 0.
      * @param obj
      * @return Boolean
+     * @throws java.lang.IllegalAccessException
+     * @throws java.lang.reflect.InvocationTargetException
+     * @throws java.lang.NoSuchFieldException
      */
-    public static Boolean deleteObject(DataObject obj) {
-        return true;
+    public static Boolean deleteObject(DataObject obj) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchFieldException {
+        obj.makeInactive();
+        return DataStore.updateObject(obj);
     }
 
 }
